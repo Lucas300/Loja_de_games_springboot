@@ -21,11 +21,11 @@ public class Jogos {
 	
 	@NotBlank(message = "Esse campo é obrigatório")   //Not Null
 	@Size(min = 10, max = 1000, message = "Digite no min 5 e no maximo 10 caracteres")
-	private String nome_jogo;
+	private String nome;
 	
 	@NotBlank(message = "Esse campo é obrigatório")   //Not Null
 	@Size(min = 10, max = 1000, message = "Digite no min 5 e no maximo 10 caracteres")
-	private String Descricao_jogo;
+	private String Descricao;
 	
 	@DecimalMin(value = "0.0", inclusive = false, message = "O salário deve ser maior que zero.")
 	@Column(nullable = false, precision = 10, scale = 2)
@@ -44,19 +44,19 @@ public class Jogos {
 	}
 
 	public String getNome_jogo() {
-		return nome_jogo;
+		return nome;
 	}
 
 	public void setNome_jogo(String nome_jogo) {
-		this.nome_jogo = nome_jogo;
+		this.nome = nome_jogo;
 	}
 
 	public String getDescricao_jogo() {
-		return Descricao_jogo;
+		return Descricao;
 	}
 
 	public void setDescricao_jogo(String descricao_jogo) {
-		Descricao_jogo = descricao_jogo;
+		Descricao = descricao_jogo;
 	}
 
 	public BigDecimal getPreco() {
