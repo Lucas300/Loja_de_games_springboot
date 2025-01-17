@@ -2,38 +2,40 @@ package com.generation.loja_games.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_jogos")
-public class Jogos {
+public class Produtos {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Esse campo é obrigatório")   //Not Null
-	@Size(min = 10, max = 1000, message = "Digite no min 5 e no maximo 10 caracteres")
 	private String nome;
 	
-	@NotBlank(message = "Esse campo é obrigatório")   //Not Null
-	@Size(min = 10, max = 1000, message = "Digite no min 5 e no maximo 10 caracteres")
-	private String Descricao;
+	@NotNull
+	private String descricao;
 	
 	@DecimalMin(value = "0.0", inclusive = false, message = "O salário deve ser maior que zero.")
 	@Column(nullable = false, precision = 10, scale = 2)
-	private BigDecimal Preco; 
+	private BigDecimal preco; 
 	
-	@NotBlank(message = "Esse campo é obrigatório")   //Not Null
-	@Size(min = 2, max = 1000, message = "Digite no min 5 e no maximo 10 caracteres")
+	
 	private String plataforma; //pc, xbox, playstation, nitendo
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produtos") //evita loop
+	private Categorias categorias;
 
 	public Long getId() {
 		return id;
@@ -43,28 +45,28 @@ public class Jogos {
 		this.id = id;
 	}
 
-	public String getNome_jogo() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome_jogo(String nome_jogo) {
-		this.nome = nome_jogo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDescricao_jogo() {
-		return Descricao;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescricao_jogo(String descricao_jogo) {
-		Descricao = descricao_jogo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public BigDecimal getPreco() {
-		return Preco;
+		return preco;
 	}
 
 	public void setPreco(BigDecimal preco) {
-		Preco = preco;
+		this.preco = preco;
 	}
 
 	public String getPlataforma() {
@@ -74,6 +76,12 @@ public class Jogos {
 	public void setPlataforma(String plataforma) {
 		this.plataforma = plataforma;
 	}
-	
-	
+
+	public Categorias getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Categorias categorias) {
+		this.categorias = categorias;
+	}	
 }
